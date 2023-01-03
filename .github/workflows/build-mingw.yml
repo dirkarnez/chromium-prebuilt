@@ -49,6 +49,7 @@ jobs:
         shell: cmd
         run: |
             echo %PATH%
+            set DEPOT_TOOLS_WIN_TOOLCHAIN=0
             set PATH=^
             C:\Windows\System32\WindowsPowerShell\v1.0;^
             ${{ github.workspace }}\mingw64;^
