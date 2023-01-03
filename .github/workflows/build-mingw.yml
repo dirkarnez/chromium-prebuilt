@@ -22,7 +22,7 @@ jobs:
         
       - shell: cmd
         run: |
-          curl https://storage.googleapis.com/chrome-infra/depot_tools.zip &&^
+          curl https://storage.googleapis.com/chrome-infra/depot_tools.zip -L --output depot_tools.zip  &&^
           7z.exe x depot_tools.zip -o"depot_tools"
         
       - name: curl PortableGit-2.38.1-64-bit.7z.exe
