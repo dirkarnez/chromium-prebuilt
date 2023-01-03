@@ -71,7 +71,8 @@ jobs:
             fetch --no-history chromium &&^
             dir &&^
             cd src &&^
-            gn gen out/Default
+            gn gen out/Default &&^
+            autoninja -C out\Default chrome
             
       - name: Archive Release
         uses: thedoctor0/zip-release@master
