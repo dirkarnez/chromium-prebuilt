@@ -65,7 +65,7 @@ jobs:
             git config --global core.autocrlf false &&^
             git config --global core.filemode false &&^
             mkdir chromium && cd chromium &&^
-            fetch chromium --no-history &&^
+            fetch --no-history chromium &&^
             cd src &&^
             gn gen out/Default
             
