@@ -69,11 +69,9 @@ jobs:
             cd /d C:\ &&^
             mkdir chromium && cd chromium &&^
             fetch --no-history chromium &&^
-            dir
-            
-#            &&^
-#            cd src &&^
-#            gn gen out/Default
+            dir &&^
+            cd src &&^
+            gn gen out/Default
             
       - name: Archive Release
         uses: thedoctor0/zip-release@master
