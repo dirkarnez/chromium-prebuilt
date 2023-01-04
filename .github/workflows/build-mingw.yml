@@ -13,7 +13,7 @@ jobs:
     env:
       libraryName: chromium
       installationPath: chromium-installation
-      tagName: 111.0.5515.1
+      tagName: 111.0.5518.1
       msvcTargetZip: chromium-${{ github.ref_name }}-msvc2019.zip
     steps:
 #      - name: git clone
@@ -64,12 +64,16 @@ jobs:
             git config --global user.email "jdoe@email.com" &&^
             git config --global core.autocrlf false &&^
             git config --global core.filemode false &&^
+            git config --global branch.autosetuprebase always &&^
             cd /d C:\ &&^
             mkdir chromium && cd chromium &&^
-            fetch --no-history chromium &&^
+            fetch --nohooks --no-history chromium &&^
             dir &&^
             cd src &&^
-            gn gen out/Default &&^
+            gclient sync --with_branch_heads --with_tags &&^
+            git fetch origin &&^
+            git checkout -f  ${{ env.tagName }} &&^
+            gn gen --args="is_debug=false target_cpu=\"x64\"" out/Default &&^
             autoninja -C out\Default chrome
             
       - name: Archive Release
