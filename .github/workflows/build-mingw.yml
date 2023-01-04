@@ -52,8 +52,6 @@ jobs:
             set DEPOT_TOOLS_WIN_TOOLCHAIN=0
             set PATH=^
             C:\Windows\System32\WindowsPowerShell\v1.0;^
-            ${{ github.workspace }}\mingw64;^
-            ${{ github.workspace }}\mingw64\bin;^
             ${{ github.workspace }}\ninja-win;^
             ${{ github.workspace }}\depot_tools;^
             ${{ github.workspace }}\PortableGit-2.38.1-64-bit\bin;^
