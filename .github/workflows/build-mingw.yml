@@ -9,11 +9,11 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: windows-latest
+    runs-on: windows-2019
     env:
       libraryName: chromium
       installationPath: chromium-installation
-      tagName: 111.0.5518.1
+      tagName: 111.0.5511.1
       msvcTargetZip: chromium-${{ github.ref_name }}-msvc2019.zip
     steps:
 #      - name: git clone
@@ -70,9 +70,9 @@ jobs:
             fetch --nohooks --no-history chromium &&^
             dir &&^
             cd src &&^
+            git fetch --tags &&^
+            git checkout -b your_release_branch ${{ env.tagName }} &&^
             gclient sync --with_branch_heads --with_tags &&^
-            git fetch origin &&^
-            git checkout -f  ${{ env.tagName }} &&^
             gn gen --args="is_debug=false target_cpu=\"x64\"" out/Default &&^
             autoninja -C out\Default chrome
             
