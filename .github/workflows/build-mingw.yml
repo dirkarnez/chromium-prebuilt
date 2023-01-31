@@ -70,9 +70,8 @@ jobs:
             fetch --nohooks --no-history chromium &&^
             dir &&^
             cd src &&^
-            git fetch --tags &&^
             git checkout -b your_release_branch ${{ env.tagName }} &&^
-            gclient sync --with_branch_heads --with_tags &&^
+            gclient sync &&^
             gn gen --args="is_debug=false target_cpu=\"x64\"" out/Default &&^
             autoninja -C out\Default chrome
             
