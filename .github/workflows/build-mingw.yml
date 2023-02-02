@@ -59,20 +59,18 @@ jobs:
             ${{ github.workspace }}\python-3.8.10-amd64-portable;^
             ${{ github.workspace }}\python-3.8.10-amd64-portable\Scripts;^
             %PATH%
-            gclient &&^
             git config --global user.name "John Doe" &&^
             git config --global user.email "jdoe@email.com" &&^
             git config --global core.autocrlf false &&^
             git config --global core.filemode false &&^
             git config --global branch.autosetuprebase always &&^
+            gclient &&^
             cd /d C:\ &&^
             mkdir chromium && cd chromium &&^
             fetch --nohooks --no-history chromium &&^
-            dir &&^
             cd src &&^
             git fetch --tags &&^
             git checkout -b your_release_branch ${{ env.tagName }} &&^
-            gclient sync &&^
             gn gen --args="is_debug=false target_cpu=\"x64\"" out/Default &&^
             autoninja -C out\Default chrome
             
