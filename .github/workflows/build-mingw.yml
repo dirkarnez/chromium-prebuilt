@@ -1,3 +1,4 @@
+
 name: cpp-cmake-mingw-prebuilt-release-actions-workflow
 on:
   push:
@@ -11,10 +12,10 @@ jobs:
     name: Create Release
     runs-on: windows-latest
     env:
-      libraryName: mojo
-      installationPath: mojo-installation
+      libraryName: chromium
+      installationPath: chromium-installation
       tagName: 119.0.6021.1
-      msvcTargetZip: mojo-${{ github.ref_name }}-msvc2019.zip
+      msvcTargetZip: chromium-${{ github.ref_name }}-msvc2019.zip
     steps:
 #      - name: git clone
 #        shell: cmd
@@ -29,6 +30,7 @@ jobs:
         run: |
           curl https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-win.zip -L --output ninja-win.zip  &&^
           7z.exe x ninja-win.zip -o"ninja-win"
+        
         
       - name: curl PortableGit-2.38.1-64-bit.7z.exe
         shell: cmd
@@ -70,8 +72,6 @@ jobs:
             cd src &&^
             git fetch --tags &&^
             git checkout -b your_release_branch ${{ env.tagName }} &&^
-            cd mojo &&^
-            dir &&^
             gn gen --args="is_debug=false target_cpu=\"x64\"" out/Default &&^
             autoninja -C out\Default chrome
             
@@ -79,12 +79,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "C:/chromium/src/mojo/out/Default"
+          directory: "C:/chromium/src/out/Default"
           filename: "${{ env.msvcTargetZip }}"
           
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "C:/chromium/src/mojo/out/Default/${{ env.msvcTargetZip }}"
+          artifacts: "C:/chromium/src/out/Default/${{ env.msvcTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
